@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { siteConfig } from '../../data/site-content';
 import { ImageWithFallback } from '../ImageWithFallback';
