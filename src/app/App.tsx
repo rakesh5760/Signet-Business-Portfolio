@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
 
 // Layout & Sections
 import { Navbar } from './components/layout/Navbar';
