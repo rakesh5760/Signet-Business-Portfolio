@@ -1,8 +1,41 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 import { siteConfig, contactInfo } from '../../data/site-content';
 
 export function Contact() {
+  const [formData, setFormData] = useState({ name: '', phone: '', requirements: '' });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
+    
+    const url = 'https://docs.google.com/forms/d/e/1FAIpQLSeinCqGHQGKz9QVhwIlFLiGZKsdIRm6qSQHZHQ_SXBUFTkCag/formResponse';
+    const data = new URLSearchParams();
+    data.append('entry.1482358372', formData.name);
+    data.append('entry.248037110', formData.phone);
+    data.append('entry.1232326808', formData.requirements);
+
+    try {
+      await fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: data.toString()
+      });
+      setStatus('success');
+      setFormData({ name: '', phone: '', requirements: '' });
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 lg:py-32 bg-white relative scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,11 +110,14 @@ export function Contact() {
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 -mr-16 -mt-16 rounded-full" />
 
             <h3 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-10 tracking-tight">Direct Inquiry</h3>
-            <form className="space-y-6 sm:space-y-8" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6 sm:space-y-8" onSubmit={handleSubmit}>
               <div className="space-y-3 sm:space-y-4">
                 <label className="text-xs sm:text-sm font-bold text-[#4B5563] uppercase tracking-widest ml-1">Full Name</label>
                 <input
                   type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. John Doe"
                   className="w-full px-5 sm:px-6 py-4 sm:py-5 rounded-2xl bg-white border-2 border-transparent focus:border-[#3B82F6] focus:ring-0 outline-none transition-all shadow-sm text-base sm:text-lg font-medium"
                 />
@@ -91,6 +127,9 @@ export function Contact() {
                 <label className="text-xs sm:text-sm font-bold text-[#4B5563] uppercase tracking-widest ml-1">Phone Number</label>
                 <input
                   type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="+91 9876543210"
                   className="w-full px-5 sm:px-6 py-4 sm:py-5 rounded-2xl bg-white border-2 border-transparent focus:border-[#3B82F6] focus:ring-0 outline-none transition-all shadow-sm text-base sm:text-lg font-medium"
                 />
@@ -100,6 +139,9 @@ export function Contact() {
                 <label className="text-xs sm:text-sm font-bold text-[#4B5563] uppercase tracking-widest ml-1">Your Requirements</label>
                 <textarea
                   rows={4}
+                  required
+                  value={formData.requirements}
+                  onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
                   placeholder="How can we assist your project?"
                   className="w-full px-5 sm:px-6 py-4 sm:py-5 rounded-2xl bg-white border-2 border-transparent focus:border-[#3B82F6] focus:ring-0 outline-none transition-all shadow-sm text-base sm:text-lg font-medium resize-none"
                 />
@@ -107,9 +149,10 @@ export function Contact() {
 
               <button
                 type="submit"
-                className="w-full py-5 sm:py-6 bg-gradient-to-r from-[#1E3A8A] to-[#3B82F6] text-white font-bold rounded-2xl hover:shadow-[0_20px_40px_rgba(30,58,138,0.25)] transition-all active:scale-95 uppercase tracking-[0.2em] text-xs sm:text-sm shadow-xl"
+                disabled={status === 'submitting'}
+                className="w-full py-5 sm:py-6 bg-gradient-to-r from-[#1E3A8A] to-[#3B82F6] text-white font-bold rounded-2xl hover:shadow-[0_20px_40px_rgba(30,58,138,0.25)] transition-all active:scale-95 uppercase tracking-[0.2em] text-xs sm:text-sm shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Submit Inquiry
+                {status === 'submitting' ? 'Submitting...' : status === 'success' ? 'Sent Successfully!' : status === 'error' ? 'Error. Try Again' : 'Submit Inquiry'}
               </button>
             </form>
           </motion.div>
