@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { siteConfig, navLinks } from '../../data/site-content';
 import logo from '../../../assets/logo.png';
 

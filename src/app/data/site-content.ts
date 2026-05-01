@@ -29,7 +29,7 @@ export const siteConfig = {
   contact: {
     address: 'Signet Electricals, Kubera Towers, Arundalpet 15th Line, Guntur, Andhra Pradesh 522002',
     googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kubera+Towers+Arundalpet+15th+Line+Guntur+522002',
-    phones: ['+91 9966167111', '+91 9966167111'],
+    phones: ['+91 9966167111', '+91 9154673030'],
     emails: ['info@signetelectricals.com'],
     whatsapp: '919966167111',
     workingHours: {

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { siteConfig, contactInfo } from '../../data/site-content';
 
 export function Contact() {
@@ -17,7 +17,7 @@ export function Contact() {
             Get In Touch
           </div>
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-[#1E3A8A] mb-8 tracking-tighter">
-            Let&apos;s Build Your <br/>
+            Let&apos;s Build Your <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1E3A8A] to-[#3B82F6]">Next Project Together</span>
           </h2>
           <p className="text-xl text-[#6B7280] max-w-2xl mx-auto font-medium leading-relaxed">
@@ -40,7 +40,7 @@ export function Contact() {
                 {contactInfo.map((item, index) => (
                   <div key={index} className="flex items-start gap-6 group">
                     <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#1E3A8A] group-hover:scale-110 transition-all duration-300">
-                      <item.icon className="w-8 h-8 text-[#3B82F6] group-hover:text-white transition-colors" strokeWidth={2.5}/>
+                      <item.icon className="w-8 h-8 text-[#3B82F6] group-hover:text-white transition-colors" strokeWidth={2.5} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-[10px] sm:text-xs font-bold text-[#94A3B8] uppercase tracking-[0.2em] mb-2">{item.title}</div>
@@ -48,7 +48,7 @@ export function Contact() {
                         {item.content}
                       </div>
                       {item.isMap && (
-                        <a 
+                        <a
                           href={siteConfig.contact.googleMapsUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -75,14 +75,14 @@ export function Contact() {
           >
             {/* Decorative Card Element */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 -mr-16 -mt-16 rounded-full" />
-            
+
             <h3 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-10 tracking-tight">Direct Inquiry</h3>
             <form className="space-y-6 sm:space-y-8" onSubmit={(e) => e.preventDefault()}>
               <div className="space-y-3 sm:space-y-4">
                 <label className="text-xs sm:text-sm font-bold text-[#4B5563] uppercase tracking-widest ml-1">Full Name</label>
                 <input
                   type="text"
-                  placeholder="e.g. Rakesh Kumar"
+                  placeholder="e.g. John Doe"
                   className="w-full px-5 sm:px-6 py-4 sm:py-5 rounded-2xl bg-white border-2 border-transparent focus:border-[#3B82F6] focus:ring-0 outline-none transition-all shadow-sm text-base sm:text-lg font-medium"
                 />
               </div>
@@ -91,7 +91,7 @@ export function Contact() {
                 <label className="text-xs sm:text-sm font-bold text-[#4B5563] uppercase tracking-widest ml-1">Phone Number</label>
                 <input
                   type="tel"
-                  placeholder="+91"
+                  placeholder="+91 9876543210"
                   className="w-full px-5 sm:px-6 py-4 sm:py-5 rounded-2xl bg-white border-2 border-transparent focus:border-[#3B82F6] focus:ring-0 outline-none transition-all shadow-sm text-base sm:text-lg font-medium"
                 />
               </div>
